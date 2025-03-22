@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "target": "es2017",           // Поддержка Promise, padStart и других современных функций
+      "lib": ["es2017", "dom"],     // Библиотеки для ES2017 и DOM
+      "module": "commonjs",         // Модули для браузера
+      "outDir": "src",              // Выходная папка для main.js
+      "strict": true,               // Строгая типизация
+      "noImplicitAny": true,        // Запрещаем неявный any
+      "esModuleInterop": true,      // Совместимость с импортами
+      "skipLibCheck": true          // Пропускаем проверку библиотек
+    },
+    "include": ["src/**/*"],        // Указываем, какие файлы компилировать
+    "exclude": ["node_modules"]     // Исключаем node_modules
+  }

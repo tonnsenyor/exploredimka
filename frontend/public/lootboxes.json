@@ -1,0 +1,20 @@
+[
+    {
+      "id": "lootbox1",
+      "title": "Common Lootbox",
+      "description": "Contains basic rewards",
+      "animation": "/lottie/basic-lootbox.json",
+      "background": "/images/lootbox1-background.png",
+      "ribbonText": "BASIC",
+      "buttonColor": "#FFF"
+    },
+    {
+      "id": "lootbox2",
+      "title": "Rare Lootbox",
+      "description": "Contains rare rewards",
+      "animation": "/lottie/rare-lootbox.json",
+      "background": "/images/lootbox2-background.png",
+      "ribbonText": "RARE",
+      "buttonColor": "#FFF"
+    }
+  ]

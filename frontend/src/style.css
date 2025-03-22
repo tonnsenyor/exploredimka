@@ -1,0 +1,2251 @@
+/* Сброс базовых отступов и общие настройки */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* Глобальный стиль для шрифта */
+  font-family: -apple-system, "Inter", "Helvetica Neue", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+  outline: none;
+}
+
+/* Сброс базовых стилей и настройка body/html */
+html,
+body {
+  height: 100%;
+  background-color: #F8F8F8;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Глобальные стили для всех SVG */
+img[src$=".svg"] {
+  image-rendering: crisp-edges; /* Улучшает резкость */
+  image-rendering: -webkit-optimize-contrast; /* Для Webkit (Safari, Telegram) */
+  image-rendering: -moz-crisp-edges; /* Для Firefox */
+  -webkit-backface-visibility: hidden; /* Убирает артефакты в Webkit */
+  backface-visibility: hidden;
+}
+
+/* Стили для загрузочного экрана */
+
+#loading-spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+#loading-lottie {
+  width: 130px; /* Настройте размер под вашу анимацию */
+  height: 100px;
+  background-color: transparent;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+  font-size: 16px;
+  color: #007AFF;
+  font-weight: 600;
+}
+
+/* Существующий стиль .btn-blue */
+.btn-blue {
+  background-color: #007AFF;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-blue:hover {
+  background-color: #268AFF;
+}
+
+.btn-blue:active {
+  background: radial-gradient(circle at center, #268AFF 0%, #339CFF 50%, #007AFF 85%, #007AFF 100%);
+}
+
+.btn-blue:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Стили для .laboratory-buttons */
+.laboratory-buttons {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px 15px;
+  background-color: #F8F8F8;
+  align-items: center;
+  gap: 10px;
+  margin: 30px 10px 1px 10px;
+}
+
+.laboratory-buttons .btn-blue {
+  background-color: #D9D9D9;
+  color: #000;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  width: auto;
+  text-align: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.laboratory-buttons .btn-blue.active {
+  background-color: #FFFFFF;
+  color: #000;
+  border: none;
+}
+
+.laboratory-buttons .btn-blue:hover {
+  background-color: #ECECEC;
+}
+
+.laboratory-buttons .btn-blue.active:hover {
+  background-color: #F0F0F0;
+}
+
+.laboratory-buttons .btn-blue:active {
+  background-color: #D9D9D9;
+}
+
+.btn-blue.disabled {
+  opacity: 0.5;
+  pointer-events: none; /* Отключаем взаимодействие с кнопкой */
+}
+
+/* Новый стиль для .nav-button */
+.nav-button {
+  background-color: #D9D9D9; /* Аналогично .laboratory-buttons .btn-blue */
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  text-align: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-button.active {
+  background-color: #FFFFFF; /* Аналогично .laboratory-buttons .btn-blue.active */
+  color: #000;
+  border: none;
+}
+
+.nav-button:hover {
+  background-color: #ECECEC; /* Аналогично .laboratory-buttons .btn-blue:hover */
+}
+
+.nav-button.active:hover {
+  background-color: #F0F0F0; /* Аналогично .laboratory-buttons .btn-blue.active:hover */
+}
+
+.nav-button:active {
+  background-color: #FFFFFF; /* Белый цвет при зажатии */
+  color: #000000; /* Синий текст для контраста */
+  transition: none; /* Отключаем переход */
+}
+
+/* Общий стиль для страницы */
+.page {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  padding: 0 0px 66px 0px;
+  background-color: #f7f7f7;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  opacity: 0; /* Начальное состояние - невидимая */
+  transform: scale(0.97); /* Начальный масштаб */
+  transition: opacity 0.15s ease, transform 0.15s ease; /* Плавный переход */
+}
+
+/* Специфичный стиль для страницы Laboratory */
+.page#laboratory {
+  background-color: #EFEFF4; /* Меняем цвет фона только для Laboratory */
+  overflow-y: auto;
+  padding-bottom: 80px; /* Учитываем высоту меню */
+}
+
+.page.hidden {
+  opacity: 0; /* Полностью скрыта */
+  transform: scale(0.99); /* Слегка уменьшена */
+  pointer-events: none; /* Отключаем взаимодействие */
+}
+
+/* Активная страница */
+.page.active {
+  opacity: 1; /* Полностью видима */
+  transform: scale(1); /* Нормальный размер */
+  pointer-events: auto; /* Включаем взаимодействие */
+}
+
+/* Скрываем скроллбар */
+.page::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Контейнеры и общая структура */
+.profile-and-mini-tap-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 55px 10px 10px 10px;
+  gap: 25px;
+  width: calc(100% - 20px);
+  box-sizing: border-box;
+  min-height: 150px; /* Минимальная высота для предотвращения сжатия */
+  flex-shrink: 0;
+}
+
+.left-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 70%;
+}
+
+.right-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  min-height: 100px;
+}
+
+/* Контейнер Profile */
+.profile-container {
+  background-color: transparent;
+  padding: 20px 0 10px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.profile-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+}
+
+.profile-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-avatar {
+  width: 53px;
+  height: 53px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-level-bar {
+  background-color: rgba(67, 120, 255, 0.1);
+  border-radius: 12px;
+  width: 42px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-level {
+  font-size: 10px;
+  font-weight: 600;
+  color: #007AFF;
+}
+
+.profile-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.profile-name-block {
+  background-color: rgba(67, 120, 255, 0.1);
+  border-radius: 8px;
+  padding: 10px 25px;
+  width: 150px;
+  box-sizing: border-box;
+}
+
+.profile-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #707579;
+  text-align: center;
+  display: block;
+}
+
+.profile-actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.store-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sbt-nft-button {
+  background: rgba(67, 120, 255, 0.1);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+}
+
+#paint-lottie {
+  width: 70px;
+  height: 70px;
+  background-color: transparent;
+  z-index: 2;
+}
+
+.store-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(94, 94, 94, 0.774);
+  text-align: center;
+  margin-top: 5px;
+  font-family: Arial, sans-serif;
+  display: block;
+  opacity: 1;
+}
+
+.tickets-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.tickets-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hearts-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.tickets-count {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+}
+
+.ticket-icon,
+.heart-icon {
+  width: 24px; /* Кратное 2 */
+  height: 24px;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  display: block;
+}
+
+.hearts-count {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+}
+
+.heart-emoji {
+  font-size: 22px;
+  color: #ff0000;
+}
+
+/* Контейнер Mini Tap */
+.mini-tap-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 5px 0;
+  height: 170px;
+  overflow: hidden;
+  box-shadow: 0px 0px 50px rgba(157, 157, 157, 0.1); /* Мягкая тень */
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+/* Стили для контейнера энергии */
+.energy-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 15px;
+  flex-shrink: 0;
+}
+
+/* Текст "Energy" (синий цвет) */
+.energy-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #007AFF;
+}
+
+/* Ряд с молнией и текстом */
+.energy-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Эмодзи молнии */
+.energy-emoji {
+  font-size: 16px;
+  color: #707579;
+}
+
+/* Текст с количеством энергии (X/100, серый цвет) */
+.energy-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: #707579;
+  margin-right: 10px;
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 375px) {
+  .profile-and-mini-tap-wrapper {
+    margin: 20px 5px 5px 5px;
+    gap: 20px;
+    width: calc(100% - 10px);
+    min-height: 120px; /* Уменьшаем минимальную высоту для маленьких экранов */
+  }
+  .left-section {
+    width: 68%;
+  }
+  .right-section {
+    width: 32%;
+    min-height: 120px;
+  }
+  .mini-tap-block {
+    min-height: 120px;
+  }
+  .energy-label {
+    font-size: 12px;
+  }
+  .energy-emoji {
+    font-size: 14px;
+  }
+  .energy-count {
+    font-size: 10px;
+  }
+}
+
+/* Стили для кнопки Mini Tap */
+.mini-tap-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  margin-top: 15px;
+  margin-bottom: 22px;
+  transition: transform 0.1s ease;
+  transform: scale(1);
+}
+
+.mini-tap-button.pressed {
+  transform: scale(0.9);
+}
+
+/* SVG обводка Energy Bar */
+.energy-bar-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.energy-bar-border {
+  transition: stroke-dashoffset 0.3s ease; /* Плавная анимация изменения обводки */
+  fill: none;
+  stroke: #e2e7ee; /* Цвет обводки */
+  stroke-width: 5; /* Толщина обводки */
+  rx: 20; /* Скругление углов */
+  ry: 20;
+}
+
+/* Анимация при тапе */
+@keyframes tap-feedback {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.mini-tap-button:active {
+  animation: tap-feedback 0.2s ease;
+}
+
+/* Кнопка Help */
+.help-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.help-svg {
+  width: 35px;
+  height: 35px;
+}
+
+/* Анимация сердечек при тапе */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  color: #007AFF;
+  pointer-events: none;
+  animation: floatUp 1.5s ease-in-out forwards;
+}
+
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0) translateX(0); }
+  100% { opacity: 0; transform: translateY(-100px) translateX(var(--random-x)); }
+}
+
+@-webkit-keyframes floatUp {
+  0% { opacity: 1; -webkit-transform: translateY(0) translateX(0); }
+  100% { opacity: 0; -webkit-transform: translateY(-100px) translateX(var(--random-x)); }
+}
+
+.wallet-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.nav-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+  background-color: rgba(67, 120, 255, 0.1);
+}
+
+.connect-wallet-button {
+  background-color: #007bff;
+}
+
+.connect-wallet-button.connected {
+  background-color: rgba(67, 120, 255, 0.1);
+  cursor: default;
+}
+
+.wallet-address {
+  padding: 10px 20px;
+  background-color: rgba(67, 120, 255, 0.1);
+  color: rgb(121, 124, 128);
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Boost Project & Earn Airdrop */
+.boost-project {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  align-items: flex-start;
+  min-height: 150px;
+  margin: 25px 10px;
+  border-radius: 16px;
+  width: calc(100% - 20px);
+  box-sizing: border-box;
+}
+
+.boost-project-bg {
+  display: none;
+}
+
+.boost-project-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 16px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.boost-project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+}
+
+.text-boost-project {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 70%;
+  color: #000;
+  text-align: left;
+  gap: 5px;
+}
+
+.text-boost-project strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: #000;
+}
+
+.text-boost-project-light {
+  font-size: 12px;
+  color: #999;
+}
+
+.community-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 30%;
+}
+
+#community-lottie {
+  width: 125px !important;
+  height: 125px !important;
+}
+
+.button-try-it-out {
+  height: 40px;
+  width: 100px;
+  font-size: 10px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+
+/* Laboratory Page */
+/* Spacer */
+.spacer {
+  height: 55px; /* Отступ сверху 32px */
+}
+
+/* Profile Section */
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Выравниваем содержимое (Username и ID) по центру */
+  padding: 0 10px;
+  margin-bottom: 20px;
+}
+
+.profile-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.profile-avatar {
+  width: 96px; /* Размер аватара 96x96px */
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-level-badge {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: #007AFF;
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 12px;
+  border: 2px solid #FFFFFF;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Выравниваем ID (Fill) по центру блока */
+  margin-top: 10px;
+}
+
+.profile-username {
+  font-size: 16px; /* Username 16px */
+  font-weight: 600;
+  color: #000; /* Черный */
+}
+
+.profile-id {
+  font-size: 10px; /* ID 10px */
+  color: #007AFF; /* Цвет #007AFF */
+  margin-top: 4px;
+}
+
+.energy-display {
+  margin-top: 0px; /* Оставляем отступ, но убираем содержимое */
+}
+
+.progress-bar.energy-bar {
+  width: 100%;
+  height: 5px;
+  background-color: #ffffffb3; /* Фон прогресс-бара */
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar.energy-bar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #007AFF; /* Цвет заполнения (синий, как в вашем проекте) */
+  transform: scaleX(var(--energy-scale));
+  transform-origin: left; /* Начинаем анимацию с левого края */
+  transition: transform 0.3s ease; /* Плавная анимация */
+}
+
+/* Profile Buttons */
+.profile-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 0 10px;
+  margin-bottom: 40px;
+}
+
+.button-item {
+  display: flex;
+  flex-direction: column; /* Меняем направление на вертикальное */
+  align-items: center; /* Центрируем элементы по горизонтали */
+  gap: 5px;
+  background: none;
+  margin-top: 25px;
+  min-width: 100px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Стили для страницы Laboratory */
+#laboratory .button-icon {
+  width: 28px;
+  height: 28px;
+}
+
+/* Стили для страницы Roulette */
+#roulette .button-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.button-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: #007AFF; /* Меняем цвет на #007AFF */
+}
+
+.button-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #007AFF; /* Меняем цвет на #007AFF */
+}
+
+/* Asset Blocks */
+.asset-block {
+  width: calc(100% - 20px);
+  margin: 0px 10px 10px 10px;
+  border-radius: 16px;
+  background: #f4f4f4;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.asset-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px; /* Высота блока 68px */
+  padding: 10px 15px;
+}
+
+.asset-logo {
+  margin-right: 10px;
+}
+
+.asset-logo-img {
+  width: 40px; /* Логотип 40x40px */
+  height: 40px;
+}
+
+.asset-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.asset-name {
+  font-size: 16px; /* Title 22px */
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #000;
+}
+
+.asset-description {
+  font-size: 15px; /* Description 17px */
+  font-weight: 400;
+  color: #707579;
+}
+
+.asset-amount {
+  font-size: 16px; /* Amount 17px */
+  font-weight: 600;
+  color: #000;
+}
+
+/* Day Check-In */
+.day-check-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: static;
+  z-index: 1;
+}
+
+.day-check-in .asset-logo {
+  width: 40px;
+  height: 40px;
+}
+
+#checkmark-lottie {
+  width: 40px;
+  height: 40px;
+  display: block !important;
+}
+
+.day-check-in .asset-description {
+  color: #999;
+}
+
+.day-check-in .asset-action {
+  height: 36px;
+  width: 80px;
+  font-size: 14px;
+  border-radius: 18px;
+}
+
+/* Анимация сердечек */
+.heart {
+  position: fixed;
+  font-size: 20px;
+  z-index: 1000;
+  animation: float 1.5s ease-in-out forwards;
+}
+
+@keyframes float {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--random-x), -50px) scale(1.5);
+  }
+}
+
+
+/* Header */
+.header {
+  position: relative;
+  width: 390px;
+  height: 399px;
+  background-color: #3596FF;
+  background-image: url('/public/Pattern.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin-left: 0px; /* Убираем margin-left */
+  margin-top: 30px;
+  width: 100%; /* Занимаем всю ширину */
+  height: 300px;
+  padding: 0 30px; /* Добавляем внутренние отступы */
+  box-sizing: border-box;
+}
+
+.header-title {
+  font-size: 36px;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 1.2;
+  margin-top: 30px;
+}
+
+.header-description {
+  font-size: 16px;
+  font-weight: 400;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+}
+
+.header-button {
+  width: 100%; /* Делаем ширину 100% относительно .header-slide */
+  max-width: 100%; /* Ограничиваем максимальную ширину */
+  height: 50px;
+  background-color: #FFFFFF;
+  color: #000000;
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  display: block;
+  opacity: 1;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  margin: 0 auto; /* Центрируем кнопку */
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+  padding-right: 40px;
+  margin-left: 30px;
+}
+
+.pagination-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #FFFFFF;
+  opacity: 0.25;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.pagination-dot.active {
+  width: 11px;
+  height: 8px;
+  background-color: #FFFFFF;
+  opacity: 1;
+  border-radius: 4px;
+  position: relative;
+}
+
+.pagination-dot.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -4px;
+  width: 20px;
+  height: 8px;
+  background-color: #FFFFFF;
+  opacity: 0.25;
+  border-radius: 4px;
+  z-index: -1;
+}
+
+/* Header Slides */
+.header-slides {
+  width: calc(100% - 40px);
+  position: relative;
+  overflow: hidden;
+  flex-grow: 1;
+  min-height: 200px;
+  display: flex;
+  margin-left: -30px;
+}
+
+.header-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-left: 50px;
+}
+.header-slide.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.header-slide.exit {
+  opacity: 0;
+  transform: translateX(-100%); /* Уходит влево при смене */
+}
+
+/* Partners Section */
+.partners-section {
+  width: 105%;
+  height: auto;
+  padding: 10px 0;
+  box-sizing: border-box;
+  margin-bottom: 50px;
+}
+
+.partners-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  text-align: left;
+  margin-left: 25px;
+}
+
+.partners-list {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 0 10px;
+  scrollbar-width: none;
+  justify-content: flex-start; /* Убедимся, что группы начинаются с левого края */
+}
+
+.partners-list::-webkit-scrollbar {
+  display: none;
+}
+
+.partner-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 300px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.partner-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Выравниваем содержимое по левому краю */
+  height: 72px;
+}
+
+.partner-logo-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  margin-right: 10px; /* Отступ справа от логотипа */
+}
+
+.partner-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Выравниваем текст по левому краю */
+  flex: 1;
+}
+
+.partner-name {
+  font-size: 17px;
+  font-weight: 400;
+  color: #000;
+}
+
+.partner-description {
+  font-size: 15px;
+  font-weight: 400;
+  color: #707579;
+  margin-top: 4px;
+}
+
+.partner-action {
+  height: 36px;
+  width: 80px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 20px;
+  margin-left: auto; /* Прижимаем кнопку к правому краю */
+}
+/* EARN PAGE */
+
+/* Контейнер для tasks.gif и заголовка */
+.text-earn-container {
+  display: flex;
+  flex-direction: column; /* Устанавливаем вертикальное расположение */
+  justify-content: center;
+  align-items: center; /* Центрируем по горизонтали */
+  margin: 20px 10px;
+  text-align: center; /* Дополнительно центрируем текст */
+}
+
+/* Стили для tasks.gif */
+.earn-gif {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  display: block; /* Убедимся, что изображение блочное */
+  margin: 0 auto; /* Центрируем изображение */
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+/* Заголовок */
+.earn-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin: 10px 0; /* Увеличим вертикальный отступ */
+  max-width: 300px;
+  white-space: normal;
+  word-wrap: break-word;
+}
+.text-earn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 20px 10px;
+}
+
+.follow-earn-text-container {
+  flex: 0 0 64%;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.follow-earn-container {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  padding-top: 5px;
+  gap: 6%;
+}
+
+.follow-earn-container > div:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Контейнер задач */
+.tasks-container {
+  background-color: #f0f0f0;
+  border-radius: 16px;
+  padding: 20px;
+  width: calc(100% - 20px);
+  margin: 10px 10px; /* Увеличим вертикальный отступ */
+}
+
+/* Вкладки */
+.task-tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px; /* Увеличим отступ снизу */
+  position: relative;
+}
+
+/* Заголовок "Tasks" */
+.tasks-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 10px; /* Увеличим отступ снизу */
+  text-align: left;
+}
+
+/* Контейнеры задач */
+.follow-earn-container {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  padding-top: 5px; /* Увеличим верхний отступ */
+  gap: 6%;
+  margin-bottom: -10px; /* Добавим отступ между задачами */
+}
+
+/* Убедимся, что последний элемент не добавляет лишний отступ */
+.follow-earn-container:last-child {
+  margin-bottom: 0;
+}
+
+.button-earn-start {
+  width: 80px;
+  height: 38px;
+  font-size: 14px;
+  border-radius: 20px;
+}
+
+.follow-earn-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  font-size: 11px;
+  width: 100%;
+  padding-left: 10px;
+  gap: 5px;
+}
+
+.tab {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #999;
+  cursor: pointer;
+  padding-bottom: 5px;
+  position: relative;
+  flex: 1;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent; /* Убираем затемнение на iOS */
+  tap-highlight-color: transparent; /* Убираем затемнение на других платформах */
+  outline: none; /* Убираем обводку при фокусе */
+}
+
+.tab.active {
+  color: #007AFF;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #007AFF;
+}
+
+.page#earn > * {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Referral System */
+.page#referrals {
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0 10px 81px 10px;
+  background-color: #F8F8F8;
+  overflow-y: auto;
+  box-sizing: border-box;
+  scrollbar-width: none; /* Скрываем скроллбар в Firefox */
+}
+
+.page#referrals::-webkit-scrollbar {
+  display: none; /* Скрываем скроллбар в WebKit (Safari, Chrome, iOS) */
+}
+
+.page#referrals.active {
+  display: flex;
+}
+/* Referral Banner */
+.referral-banner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: auto;
+  min-height: 180px;
+  margin: 25px 10px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #fff;
+  width: calc(100% - 20px);
+  box-sizing: border-box;
+}
+
+.referral-banner-bg {
+  display: none;
+}
+
+.referral-banner-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 16px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.referral-banner-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+}
+
+.text-referral-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 65%;
+  margin-left: 0;
+  color: #000;
+  text-align: left;
+  gap: 5px;
+}
+
+.text-referral-banner strong {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.text-referral-banner-light {
+  font-size: 12px;
+  color: #999;
+}
+
+.referral-icon {
+  display: flex;
+}
+
+#shake-top-lottie {
+  width: 220px !important; /* Увеличиваем ширину */
+  height: 220px !important; /* Увеличиваем высоту */
+  position: absolute; /* Позиционируем абсолютно внутри .referral-icon */
+  top: 30px; /* Прижимаем к верхнему краю */
+  right: 0; /* Прижимаем к правому краю */
+}
+
+#shake-top-lottie svg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.button-invite {
+  height: 40px;
+  width: 100px;
+  font-size: 14px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+@media (max-width: 375px) {
+  .referral-banner {
+    min-height: 180px; /* Уменьшаем для адаптивности */
+  }
+  .referral-icon {
+    width: 170px;
+    height: 170px;
+  }
+  #shake-top-lottie {
+    width: 170px !important;
+    height: 170px !important;
+    top: -40px; /* Корректируем позицию для маленьких экранов */
+    right: -40px;
+  }
+  .text-referral-banner {
+    width: 60%; /* Чуть меньше для маленьких экранов */
+  }
+}
+
+.referrals-list {
+  width: calc(100% - 20px);
+  margin: 20px 10px;
+  padding: 20px;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+.referrals-list h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+#referrals-list-items {
+  max-height: 170px; /* Фиксируем высоту списка */
+  overflow-y: auto; /* Включаем вертикальную прокрутку */
+  overflow-x: hidden; /* Убираем горизонтальную прокрутку */
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+}
+
+#referrals-list-items li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+#referrals-list-items li img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+#referrals-list-items li span {
+  font-size: 14px;
+  color: #5a5a5a;
+}
+
+/* Меню */
+.menu {
+  position: fixed;
+  bottom: 15px;
+  left: 0;
+  width: 100%;
+  height: 66px;
+  background-color: #F8F8F8;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 5px;
+  z-index: 999;
+  box-sizing: border-box;
+  border-top: 1px solid #ECECEC;
+}
+
+/* Псевдоэлемент для закрашивания пространства снизу */
+.menu::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  width: 100%;
+  height: 15px;
+  background-color: #F8F8F8;
+  z-index: -1;
+}
+
+/* Стиль для кнопок в меню */
+.menu button {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 10px;
+  gap: 5px;
+  -webkit-appearance: none; /* Сбрасываем системные стили iOS */
+  -moz-appearance: none;
+  appearance: none;
+  color: #000000 !important; /* Явно задаём чёрный цвет для кнопки */
+  -webkit-text-fill-color: #000000 !important; /* Переопределяем WebKit-стиль */
+}
+
+/* Стиль для изображений в кнопках */
+.menu button img {
+  width: 24px;
+  height: 24px;
+  transition: all ease-in-out 0.1s;
+  filter: grayscale(100%) brightness(50%);
+}
+
+.menu button.active img {
+  width: 30px;
+  height: 30px;
+  filter: grayscale(0%) brightness(0%) invert(0%);
+}
+
+/* Стиль для текста в кнопках */
+.menu button span {
+  font-size: 10px;
+  color: #000000 !important; /* Чёрный цвет для span */
+  -webkit-text-fill-color: #000000 !important; /* Переопределяем WebKit-стиль */
+  margin-top: 4px;
+  transition: color ease-in-out 0.1s;
+}
+
+.menu button.active span {
+  color: #000000 !important; /* Чёрный цвет для активного состояния */
+  -webkit-text-fill-color: #000000 !important; /* Переопределяем WebKit-стиль */
+}
+
+/* Адаптивность */
+@media (max-width: 375px) {
+  .page {
+    padding-bottom: 56px;
+  }
+  .profile-and-mini-tap-wrapper {
+    margin: 20px 5px 5px 5px;
+    gap: 20px;
+    width: calc(100% - 10px);
+  }
+  .left-section {
+    width: 68%;
+  }
+  .profile-container {
+    padding: 12px 0;
+  }
+  .profile-block {
+    gap: 20px;
+  }
+  .profile-avatar {
+    width: 44px;
+    height: 44px;
+  }
+  .profile-level-bar {
+    width: 36px;
+    height: 16px;
+  }
+  .profile-level {
+    font-size: 9px;
+  }
+  .profile-name-block {
+    padding: 6px 20px;
+    width: 120px;
+  }
+  .profile-name {
+    font-size: 12px;
+  }
+  .profile-actions {
+    gap: 8px;
+  }
+  .paint-svg {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  .tickets-count,
+  .ticket-emoji {
+    font-size: 19px;
+  }
+  .right-section {
+    width: 32%;
+  }
+  .mini-tap-container {
+    padding: 10px 0;
+    height: 176px;
+  }
+  .mini-tap-block {
+    gap: 8px;
+  }
+  .help-svg {
+    width: 30px;
+    height: 30px;
+  }
+  .boost-project {
+    margin: 20px 5px;
+    width: calc(100% - 10px);
+  }
+  .boost-project-content {
+    padding: 15px;
+  }
+  .text-boost-project strong {
+    font-size: 13px;
+  }
+  .text-boost-project-light {
+    font-size: 11px;
+  }
+  .button-try-it-out {
+    height: 36px;
+    width: 76px;
+    font-size: 11px;
+  }
+  .day-check-in {
+    padding: 8px 15px;
+    margin: 2px 5px 5px 5px;
+    width: calc(100% - 10px);
+  }
+  .button-claim {
+    height: 33px;
+    width: 80px;
+    font-size: 9px;
+  }
+  #checkmark-lottie {
+    width: 35px;
+    height: 35px;
+  }
+  .text-day-check-in {
+    max-height: 45px;
+  }
+  .assets-content {
+    max-width: calc(100% - 10px);
+    margin: 20px 5px;
+    padding: 15px;
+  }
+  .assets-title {
+    font-size: 14px;
+  }
+  .asset-logo-svg {
+    width: 25px;
+    height: 25px;
+  }
+  .asset-name {
+    font-size: 13px;
+  }
+  .asset-action {
+    height: 28px;
+    width: 70px;
+    font-size: 9px;
+  }
+  .earn-content {
+    max-width: calc(100% - 10px);
+    margin: 20px 5px;
+    padding: 15px;
+  }
+  .earn-title {
+    font-size: 14px;
+  }
+  .tasks-list li .btn-blue {
+    height: 28px;
+    width: 60px;
+    font-size: 11px;
+  }
+  .referral-banner {
+    margin: 20px 5px;
+    width: calc(100% - 10px);
+  }
+  .referral-banner-content {
+    padding: 15px;
+  }
+  .text-referral-banner strong {
+    font-size: 13px;
+  }
+  .text-referral-banner-light {
+    font-size: 11px;
+  }
+  .button-invite {
+    height: 36px;
+    width: 76px;
+    font-size: 11px;
+  }
+  .referral-icon {
+    height: 120px;
+  }
+  #shake-top-lottie {
+    width: 170px !important;
+    height: 170px !important;
+  }
+  .referrals-list {
+    padding: 15px 5px;
+  }
+  #referrals-list-items li img {
+    width: 35px;
+    height: 35px;
+  }
+  .shake-banner-text strong {
+    font-size: 14px;
+  }
+  .shake-banner-description {
+    font-size: 11px;
+  }
+  .shake-banner-img {
+    width: 80px;
+    height: 80px;
+  }
+  .shake-banner-button {
+    height: 28px;
+    width: 60px;
+    font-size: 11px;
+  }
+  .partners-title {
+    font-size: 14px;
+  }
+  .partner-logo-img {
+    width: 35px;
+    height: 35px;
+  }
+  .partner-name {
+    font-size: 13px;
+  }
+  .partner-description {
+    font-size: 11px;
+  }
+  .partner-action {
+    height: 28px;
+    width: 60px;
+    font-size: 11px;
+  }
+  .menu button img {
+    width: 20px;
+    height: 20px;
+  }
+  .menu button.active img {
+    width: 26px;
+    height: 26px;
+  }
+  .menu button span {
+    font-size: 9px;
+  }
+}
+
+/* Сегмент-контроль (имитация iOS) */
+/* Segment Control */
+.segment-control {
+  display: flex;
+  justify-content: center;
+  margin: 20px 10px; /* Выравнивание по левому краю с отступом */
+  background-color: #e5e5ea;
+  border-radius: 10px;
+  padding: 4px;
+  width: calc(100% - 20px); /* Занимаем всю ширину */
+}
+
+.segment-button {
+  flex: 1;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.segment-button.active {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  color: #000;
+}
+
+/* Вкладки */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Вкладка Roulette */
+/* Roulette Section */
+.roulette-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Выравниваем по левому краю */
+  width: 100%;
+  padding: 20px 10px;
+}
+
+/* Spin Left */
+.spin-left {
+  font-size: 12px;
+  font-weight: 600;
+  color: #bdbdbd;
+  margin-bottom: -10px;
+  margin-left: 10px; /* Прижимаем к левому краю */
+  margin-top: 25px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 3%;
+}
+
+/* Roulette Container */
+.roulette-container {
+  display: flex;
+  justify-content: flex-start; /* Выравниваем карточки по левому краю */
+  align-items: center;
+  overflow-x: auto;
+  height: auto;
+  width: 110%;
+  margin: 0 10px;
+  gap: 10px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-top: 20px;
+  margin-left: -10px;
+  box-sizing: content-box; /* Убедимся, что padding не влияет на ширину */
+}
+
+.roulette-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Roulette Item */
+.roulette-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px; /* Фиксированная ширина */
+  height: 285px; /* Фиксированная высота */
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(89, 89, 89, 0.05); /* Мягкая тень */
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* Убираем различия между main-item и side-item */
+.roulette-item.main-item,
+.roulette-item.side-item {
+  width: 190px;
+  height: 285px;
+  opacity: 1; /* Убираем разницу в прозрачности */
+  z-index: 1;
+  scroll-snap-align: start;
+}
+
+/* Roulette Animation */
+.roulette-animation {
+  width: 100%;
+  height: 90%; /* Анимация занимает верхнюю часть карточки */
+  background-color: transparent;
+}
+
+/* NFT Details */
+.nft-details {
+  width: 100%;
+  height: 30%; /* Нижняя часть карточки */
+  background-color: #f8f8f8; /* Белый фон */
+  padding: 5px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nft-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 4px;
+  margin-left: 10px;
+}
+
+.nft-collection {
+  font-size: 12px;
+  font-weight: 400;
+  color: #707579;
+  margin-left: 10px;
+}
+
+/* Roulette Buttons */
+.roulette-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Небольшой отступ между кнопками */
+  margin-top: 20px;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.btn-blue.buy-spins-button,
+.rewards-list-button {
+  width: calc(50% - 5px); /* Половина ширины экрана с учётом отступа */
+  height: 60px; /* Высота 60px */
+  font-size: 13px; /* Шрифт 13px */
+  font-weight: 400; /* Regular */
+  display: flex;
+  flex-direction: column; /* Иконка сверху, текст снизу */
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 10px;
+  gap: 5px;
+}
+
+.btn-blue.buy-spins-button {
+  background-color: #007AFF;
+  color: #FFFFFF;
+}
+
+.rewards-list-button {
+  background-color: #FFFFFF;
+  border: 1px solid #ffffff;
+  color: #000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.rewards-list-button:hover {
+  background-color: #F0F0F0;
+}
+
+
+/* Roulette Info */
+.roulette-info {
+  width: calc(100% - 20px);
+  margin: 20px 10px;
+  padding: 20px;
+  background-color: #f3f3f3;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+.info-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.info-block {
+  margin-bottom: 20px;
+}
+
+.info-description {
+  font-size: 14px;
+  font-weight: 400;
+  color: #707579;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+/* Stake NFT Section */
+.stake-nft-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.stake-nft-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #707579;
+}
+
+.stake-nft-button {
+  background-color: #282828; /* Чёрный цвет */
+  color: #FFFFFF;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.stake-nft-button:hover {
+  background-color: #333333;
+}
+
+/* Стили для списка лутбоксов */
+.lootboxes-section {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.lootboxes-section h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.lootboxes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center; /* Центрируем элементы по горизонтали */
+}
+
+.lootbox-card {
+  position: relative;
+  display: flex;
+  justify-content: center; /* Центрируем содержимое .lootbox-card */
+  width: 100%; /* Убедимся, что карточка занимает всю доступную ширину */
+  max-width: 250px; /* Ограничим максимальную ширину карточки, чтобы она не растягивалась */
+}
+
+.lootbox-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  min-height: 200px;
+  position: relative;
+  overflow: hidden;
+  width: 100%; /* Убедимся, что .lootbox-content занимает всю ширину .lootbox-card */
+}
+
+/* Лента в правом верхнем углу */
+.ribbon {
+  position: absolute;
+  top: 10px;
+  right: -30px;
+  background-color: #8a4af3; /* Фиолетовый цвет ленты */
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px 40px;
+  transform: rotate(45deg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  z-index: 1; /* Убедимся, что лента поверх других элементов */
+}
+
+.lootbox-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.lootbox-animation {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 50px;
+  overflow: hidden;
+}
+
+.lootbox-info {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.lootbox-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.lootbox-description {
+  font-size: 14px;
+  color: #ddd;
+}
+
+.lootbox-button {
+  height: 40px;
+  width: 100px;
+  font-size: 14px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Контейнер для звёздочек */
+.lootbox-button .star-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0; /* Чтобы звёздочки были под текстом */
+}
+
+/* Общий стиль для звёздочек */
+.lootbox-button .star-container::before,
+.lootbox-button .star-container::after,
+.lootbox-button .star-container .star-1::before,
+.lootbox-button .star-container .star-1::after,
+.lootbox-button .star-container .star-2::before,
+.lootbox-button .star-container .star-2::after,
+.lootbox-button .star-container .star-3::before,
+.lootbox-button .star-container .star-3::after {
+  content: '✦';
+  position: absolute;
+  color: #000000; /* Чёрный цвет для контраста на белом фоне */
+  font-size: 7px;
+  opacity: 0; /* Начальная непрозрачность */
+  filter: brightness(1); /* Для эффекта свечения */
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Свечение в тон */
+}
+
+/* Вспомогательные элементы для звёздочек */
+.lootbox-button .star-container .star-1,
+.lootbox-button .star-container .star-2,
+.lootbox-button .star-container .star-3 {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+/* Группа 1: 3 звёздочки слева */
+.lootbox-button .star-container::before {
+  left: 5px;
+  top: 5px;
+  animation: sparkle 3s infinite;
+  animation-delay: 0s;
+}
+
+.lootbox-button .star-container::after {
+  left: 5px;
+  bottom: 5px;
+  animation: sparkle 3s infinite;
+  animation-delay: 0.2s;
+}
+
+.lootbox-button .star-container .star-1::before {
+  left: 15px;
+  top: 15px;
+  animation: sparkle 3s infinite;
+  animation-delay: 0.4s;
+}
+
+/* Группа 2: 3 звёздочки справа */
+.lootbox-button .star-container .star-1::after {
+  right: 5px;
+  top: 5px;
+  animation: sparkle 3s infinite;
+  animation-delay: 1s;
+}
+
+.lootbox-button .star-container .star-2::before {
+  right: 5px;
+  bottom: 5px;
+  animation: sparkle 3s infinite;
+  animation-delay: 1.2s;
+}
+
+.lootbox-button .star-container .star-2::after {
+  right: 15px;
+  top: 15px;
+  animation: sparkle 3s infinite;
+  animation-delay: 1.4s;
+}
+
+/* Группа 3: 2 звёздочки по разным бокам */
+.lootbox-button .star-container .star-3::before {
+  left: 30px;
+  top: 5px;
+  animation: sparkle 3s infinite;
+  animation-delay: 2s;
+}
+
+.lootbox-button .star-container .star-3::after {
+  right: 30px;
+  bottom: 5px;
+  animation: sparkle 3s infinite;
+  animation-delay: 2.2s;
+}
+
+/* Анимация "перелива" (ещё более плавное появление и исчезновение) */
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+    filter: brightness(1);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1.1);
+    filter: brightness(2);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.8);
+    filter: brightness(1.3);
+  }
+  75% {
+    opacity: 0;
+    transform: scale(0.5);
+    filter: brightness(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+    filter: brightness(1);
+  }
+}

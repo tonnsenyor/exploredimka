@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <!-- Мета-тег для Telegram WebApp -->
+    <meta name="telegram:webapp" content="true" />
+    <link rel="stylesheet" href="/src/style.css?v=9">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <!-- Официальный скрипт Telegram WebApp -->
+    <script src="https://telegram.org/js/telegram-web-app.js?v=2025"></script>
+</head>
+<body>
+    <!-- Загрузочный спиннер -->
+    <div id="loading-spinner">
+      <div id="loading-lottie"></div>
+    </div>
+
+    <!-- Основные разделы (страницы) -->
+    <div id="home" class="page active">
+        <!-- Header -->
+        <div class="header">
+          <div class="header-content">
+            <!-- Контейнер для слайдов -->
+            <div class="header-slides">
+              <!-- Слайд 1 -->
+              <div class="header-slide active">
+                <h1 class="header-title">Welcome to the Game!</h1>
+                <p class="header-description">Join the adventure and start earning rewards today.</p>
+                <button class="header-button">Get Started</button>
+              </div>
+              <!-- Слайд 2 -->
+              <div class="header-slide">
+                <h1 class="header-title">Stake & Win NFTs Gifts!</h1>
+                <p class="header-description">Stake your NFTs in the roulette to win exclusive rewards.</p>
+                <button class="header-button">Learn More</button>
+              </div>
+              <!-- Слайд 3 -->
+              <div class="header-slide">
+                <h1 class="header-title">Boost Your Earnings!</h1>
+                <p class="header-description">Invite friends and earn more with our referral system.</p>
+                <button class="header-button">Invite Now</button>
+              </div>
+            </div>
+            <!-- Пагинация -->
+            <div class="pagination">
+              <div class="pagination-dot active"></div>
+              <div class="pagination-dot"></div>
+              <div class="pagination-dot"></div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Контейнер Partners -->
+        <div class="partners-section">
+          <h3 class="partners-title">Partners</h3>
+          <div class="partners-list">
+            <!-- Первая группа из трёх partner-item -->
+            <div class="partner-group">
+              <div class="partner-item">
+                <div class="partner-logo">
+                  <img src="/sticker-store-icon.png" alt="Sticker Store Logo" class="partner-logo-img" loading="lazy" onerror="this.src='/default-partner-icon.png'; this.onerror=null;" />
+                </div>
+                <div class="partner-details">
+                  <p class="partner-name">Sticker Store</p>
+                  <p class="partner-description">NFT Stickers MiniApp</p>
+                </div>
+                <button class="partner-action btn-blue" id="sticker-store-button">Open</button>
+              </div>
+              <div class="partner-item">
+                <div class="partner-logo">
+                  <img src="/memes-tournament-icon.png" alt="Memes Tournament Logo" class="partner-logo-img" loading="lazy" onerror="this.src='/default-partner-icon.png'; this.onerror=null;" />
+                </div>
+                <div class="partner-details">
+                  <p class="partner-name">Memes Tournament</p>
+                  <p class="partner-description">1,000,000 Prize Pool</p>
+                </div>
+                <button class="partner-action btn-blue" id="memes-tournament-button">Open</button>
+              </div>
+              <div class="partner-item">
+                <div class="partner-logo">
+                  <img src="/spermbank-staking-icon.png" alt="Spermbank Staking Logo" class="partner-logo-img" loading="lazy" onerror="this.src='/default-partner-icon.png'; this.onerror=null;" />
+                </div>
+                <div class="partner-details">
+                  <p class="partner-name">Spermbank</p>
+                  <p class="partner-description">Staking, dApp, DNA Store</p>
+                </div>
+                <button class="partner-action btn-blue" disabled>Soon</button>
+              </div>
+            </div>
+      
+            <!-- Вторая группа (копия для демонстрации свайпа) -->
+            <div class="partner-group">
+              <div class="partner-item">
+                <div class="partner-logo">
+                  <img src="/mobile-icon.png" alt="Mobile Logo" class="partner-logo-img" loading="lazy" onerror="this.src='/default-partner-icon.png'; this.onerror=null;" />
+                </div>
+                <div class="partner-details">
+                  <p class="partner-name">Mobile</p>
+                  <p class="partner-description">Communicatuions</p>
+                </div>
+                <button class="partner-action btn-blue">Open</button>
+              </div>
+              <div class="partner-item">
+                <div class="partner-logo">
+                  <img src="/keeper.png" alt="Keeper Logo" class="partner-logo-img" loading="lazy" onerror="this.src='/default-partner-icon.png'; this.onerror=null;" />
+                </div>
+                <div class="partner-details">
+                  <p class="partner-name">TON Keeper</p>
+                  <p class="partner-description">TON Wallet</p>
+                </div>
+                <button class="partner-action btn-blue">Open</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page" id="laboratory">
+        <!-- Spacer -->
+        <div class="spacer"></div>
+      
+        <!-- Profile Section -->
+        <div class="profile-section">
+          <div class="profile-header">
+            <img src="/public/default-avatar.png" alt="User Avatar" class="profile-avatar" id="profile-avatar" />
+            <div class="profile-level-badge">LVL 1</div>
+          </div>
+          <div class="profile-details">
+            <span class="profile-username" id="profile-name">Username</span>
+            <span class="profile-id">ID [FILL]</span>
+            <div class="energy-display">
+              <!-- Прогресс-бар энергии -->
+            </div>
+            <div class="progress-bar energy-bar"></div>
+          </div>
+        </div>
+      
+        <!-- Buttons -->
+        <div class="profile-buttons">
+          <button class="button-item hearts-row" id="hearts-button">
+            <img src="/public/heart-icon1.svg" alt="Hearts Icon" class="heart-icon" />
+            <span class="button-count hearts-count">0</span>
+          </button>
+          <div class="button-item">
+            <img src="/public/market-icon.svg" alt="Market Icon" class="button-icon" />
+            <span class="button-label">Market</span>
+          </div>
+          <div class="button-item">
+            <img src="/public/ticket-icon.svg" alt="Tickets Icon" class="button-icon" />
+            <span class="button-count tickets-count">0</span>
+          </div>
+        </div>
+      
+        <!-- Assets Blocks -->
+        <div class="asset-block">
+          <div class="asset-item">
+            <div class="asset-logo">
+              <img src="/public/spermbank-icon.png" alt="Spermbank Logo" class="asset-logo-img" />
+            </div>
+            <div class="asset-details">
+              <p class="asset-name">Spermbank</p>
+              <p class="asset-description">Connect Wallet Soon</p>
+            </div>
+            <span class="asset-amount"></span>
+          </div>
+        </div>
+      
+        <div class="asset-block">
+          <div class="asset-item">
+            <div class="asset-logo">
+              <img src="/public/inventory-icon.png" alt="Your Inventory Logo" class="asset-logo-img" />
+            </div>
+            <div class="asset-details">
+              <p class="asset-name">Your Inventory</p>
+              <p class="asset-description">NFT Gifts, Vouchers</p>
+            </div>
+            <span class="asset-amount"></span>
+          </div>
+        </div>
+      
+        <!-- Day Check-In как часть Assets -->
+        <div class="asset-block">
+          <div class="asset-item day-check-in">
+            <div class="asset-logo">
+              <div id="checkmark-lottie" style="display: none;"></div>
+            </div>
+            <div class="asset-details">
+              <p class="asset-name">Day Check-In</p>
+              <p class="asset-description" id="check-in-timer">Next claim in 08h 06m</p>
+            </div>
+            <button class="asset-action btn-blue" id="claim-button">Claim</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="page" id="earn">
+        <!-- Переносим баннер рефералов -->
+        <div class="referral-banner">
+            <div class="referral-banner-bg"></div>
+            <div class="referral-banner-content">
+                <div class="referral-banner-header">
+                    <div class="text-referral-banner">
+                        <strong>Invite a friend - get a free Spermbank token</strong>
+                        <span class="text-referral-banner-light">Join the evolution – be part of history, Earn Your Legacy</span>
+                        <button class="btn-blue button-invite">Invite</button>
+                    </div>
+                    <div class="referral-icon">
+                        <div id="shake-top-lottie"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Переносим список рефералов -->
+        <div class="referrals-list">
+            <h3>Your Referrals</h3>
+            <ul id="referrals-list-items"></ul>
+        </div>
+        <!-- Убираем .earn-gif и .earn-title, оставляем только tasks -->
+        <div class="tasks-container">
+            <div class="follow-earn-container" data-tab="special">
+                <div class="follow-earn-text-container">
+                    <p class="follow-earn-text">
+                        <strong>Follow Our Telegram Channel</strong>
+                        <span class="light-text">+1000 Points</span>
+                    </p>
+                </div>
+                <div>
+                    <button class="button-earn-start btn-blue">Start</button>
+                </div>
+            </div>
+        </div>
+      </div>
+
+    <div class="page" id="referrals">
+        <!-- Содержимое страницы Referrals остается без изменений -->
+    </div>
+
+    <!-- Новая страница #roulette для списка лутбоксов -->
+    <div id="roulette" class="page hidden">
+      <div class="lootboxes-section">
+        <h2>Lootboxes</h2>
+        <div id="lootboxes-list" class="lootboxes-list"></div>
+      </div>
+    </div>
+
+    <!-- Страница для лутбокса lootbox1 -->
+    <div id="lootbox-details-lootbox1" class="page hidden">
+      <div class="roulette-section">
+        <div class="roulette-container">
+          <div class="roulette-item">
+            <div class="roulette-animation" data-type="legendary-1"></div>
+            <div class="nft-details">
+              <p class="nft-name">Loot Bag</p>
+              <p class="nft-collection">Crypto Punk (0.5%)</p>
+            </div>
+          </div>
+          <div class="roulette-item">
+            <div class="roulette-animation" data-type="mythical-3"></div>
+            <div class="nft-details">
+              <p class="nft-name">Homemade Cake</p>
+              <p class="nft-collection">Fire Blast (0.2%)</p>
+            </div>
+          </div>
+          <div class="roulette-item">
+            <div class="roulette-animation" data-type="epic-1"></div>
+            <div class="nft-details">
+              <p class="nft-name">Homemade Cake</p>
+              <p class="nft-collection">Interstellar</p>
+            </div>
+          </div>
+        </div>
+        <div class="spin-left">Spins left: 0</div>
+        <div class="roulette-buttons">
+          <button class="btn-blue buy-spins-button">
+            <img src="/public/plus-icon.svg" alt="Plus Icon" class="button-icon" />
+            Buy Spins
+          </button>
+          <button class="rewards-list-button">
+            <img src="/public/rewards-list-icon.svg" alt="Rewards List Icon" class="button-icon" />
+            Rewards List
+          </button>
+        </div>
+      </div>
+      <div class="roulette-info">
+        <h3 class="info-title">About</h3>
+        <div class="info-block">
+          <p class="info-description">
+            Любой игрок может застейкать свой NFT в лотторею. NFT добавляется в призовой пул (он не продается, а разыгрывается в рулетке).
+          </p>
+          <p class="info-description">
+            Контракт фиксирует NFT, проверяет его floor price через API и присваивает редкость.
+          </p>
+        </div>
+        <div class="stake-nft-section">
+          <span class="stake-nft-label">Верификация контракта</span>
+          <button class="stake-nft-button">Stake NFT</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Страница для лутбокса lootbox2 -->
+    <div id="lootbox-details-lootbox2" class="page hidden">
+      <div class="roulette-section">
+        <div class="roulette-container">
+          <div class="roulette-item">
+            <div class="roulette-animation" data-type="legendary-1"></div>
+            <div class="nft-details">
+              <p class="nft-name">Loot Bag</p>
+              <p class="nft-collection">Crypto Punk (0.5%)</p>
+            </div>
+          </div>
+          <div class="roulette-item">
+            <div class="roulette-animation" data-type="mythical-3"></div>
+            <div class="nft-details">
+              <p class="nft-name">Homemade Cake</p>
+              <p class="nft-collection">Fire Blast (0.2%)</p>
+            </div>
+          </div>
+          <div class="roulette-item">
+            <div class="roulette-animation" data-type="epic-1"></div>
+            <div class="nft-details">
+              <p class="nft-name">Homemade Cake</p>
+              <p class="nft-collection">Interstellar</p>
+            </div>
+          </div>
+        </div>
+        <div class="spin-left">Spins left: 0</div>
+        <div class="roulette-buttons">
+          <button class="btn-blue buy-spins-button">
+            <img src="/public/plus-icon.svg" alt="Plus Icon" class="button-icon" />
+            Buy Spins
+          </button>
+          <button class="rewards-list-button">
+            <img src="/public/rewards-list-icon.svg" alt="Rewards List Icon" class="button-icon" />
+            Rewards List
+          </button>
+        </div>
+      </div>
+      <div class="roulette-info">
+        <h3 class="info-title">About</h3>
+        <div class="info-block">
+          <p class="info-description">
+            Любой игрок может застейкать свой NFT в лотторею. NFT добавляется в призовой пул (он не продается, а разыгрывается в рулетке).
+          </p>
+          <p class="info-description">
+            Контракт фиксирует NFT, проверяет его floor price через API и присваивает редкость.
+          </p>
+        </div>
+        <div class="stake-nft-section">
+          <span class="stake-nft-label">Верификация контракта</span>
+          <button class="stake-nft-button">Stake NFT</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Меню навигации -->
+    <div class="menu">
+        <button data-page="home" class="active">
+          <img src="/public/home-icon.png" alt="Home Icon" /> Home
+        </button>
+        <button data-page="laboratory">
+          <img src="/public/laboratory-icon.png" alt="Laboratory Icon" /> Laboratory
+        </button>
+        <button data-page="roulette">
+          <img src="/public/roulette-icon.png" alt="Roulette Icon" /> Roulette
+        </button>
+        <button data-page="earn">
+          <img src="/public/earn-icon.png" alt="Earn Icon" /> Earn
+        </button>
+    </div>
+
+    <!-- Подключаем основной скрипт -->
+    <script src="/src/main.js?v=12"></script>
+</body>
+</html>

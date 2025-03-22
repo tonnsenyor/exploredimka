@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <!-- Мета-тег для Telegram WebApp -->
+    <meta name="telegram:webapp" content="true" />
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- Официальный скрипт Telegram WebApp -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <!-- Загрузочный спиннер -->
+    <div id="loading-spinner" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Loading data...</p>
+    </div>
+
+    <!-- Кнопка TON Connect вверху страницы -->
+    <div class="wallet-connect-container">
+      <button id="connect-wallet" class="btn-blue">Connect Wallet</button>
+  </div>
+
+    <!-- Основные разделы (страницы) -->
+    <div class="page" id="home">
+        <div class="scroll-wrapper"></div>
+        <!-- Общий контейнер для Profile, Mini Tap и Energy -->
+        <div class="profile-and-mini-tap-wrapper">
+          <!-- Левая часть (70%) -->
+          <div class="left-section">
+              <!-- Контейнер Profile -->
+              <div class="profile-container">
+                  <div class="profile-block">
+                      <div class="profile-left">
+                          <img src="/public/default-avatar.png" alt="User Avatar" class="profile-avatar" id="profile-avatar" />
+                          <div class="profile-level-bar">
+                              <span class="profile-level">Lvl 44</span>
+                          </div>
+                      </div>
+                      <div class="profile-right">
+                          <div class="profile-name-block">
+                              <span class="profile-name" id="profile-name">User</span>
+                          </div>
+                          <div class="profile-actions">
+                              <div class="store-container">
+                                  <button class="sbt-nft-button">
+                                      <div id="paint-lottie"></div>
+                                  </button>
+                                  <p class="store-label">Store</p>
+                              </div>
+                              <div class="tickets-block">
+                                  <div class="tickets-row">
+                                      <span class="tickets-count">0</span>
+                                      <span class="ticket-emoji">🎟️</span>
+                                  </div>
+                                  <div class="hearts-row">
+                                      <span class="hearts-count">0</span>
+                                      <span class="heart-emoji">❤️</span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- Полоска энергии вместо кнопки Laboratory -->
+              <div class="energy">
+                  <div class="energy-bar"></div>
+              </div>
+          </div>
+          <!-- Правая часть (30%) -->
+          <div class="right-section">
+              <!-- Контейнер Mini Tap -->
+              <div class="mini-tap-container">
+                  <div class="mini-tap-block">
+                      <button class="mini-tap-button">
+                          <img src="/mini-tap-button.svg" alt="Mini Tap" class="mini-tap-svg" />
+                      </button>
+                      <button class="help-button">
+                          <img src="/help-button.svg" alt="Help" class="help-svg" />
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+        <!-- Баннер "Join The Smartest Squad" -->
+        <div class="boost-project">
+            <div class="boost-project-bg"></div>
+            <div class="boost-project-content">
+                <div class="boost-project-header">
+                    <div class="text-boost-project">
+                        <strong>Join The Smartest Squad</strong>
+                        <span class="text-boost-project-light">Start exploring TON in a new, better way</span>
+                        <button class="btn-blue button-try-it-out">Try it out</button>
+                    </div>
+                    <div class="community-icon">
+                        <div id="community-lottie"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Баннер "Day Check-In" -->
+        <div class="day-check-in">
+            <div id="checkmark-lottie" style="display: none;"></div>
+            <p class="text-day-check-in">
+                <strong id="check-in-day">1-day check-in</strong>
+                <span class="light-text" id="check-in-timer">Next claim in 08h 06m</span>
+            </p>
+            <div class="image-check-in">
+                <button class="button-claim btn-blue" id="claim-button">Claim</button>
+            </div>
+        </div>
+        <!-- Баннер "Assets" -->
+        <div class="assets-content">
+            <div class="assets-header">
+                <p class="assets-title"><strong>Assets</strong></p>
+            </div>
+            <div class="assets-list">
+                <!-- Статические активы будут добавлены через JS -->
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="laboratory">
+      <div class="laboratory-buttons">
+        <button class="nav-button main-button">Main</button>
+        <button class="nav-button services-button">Services</button>
+      </div>
+      <div class="shake-banner">
+        <div class="shake-banner-content">
+          <div class="shake-banner-text">
+            <strong>Shake To Earn</strong>
+            <span class="shake-banner-description">Become part of creating the optimal methodology for extracting the Elite...</span>
+          </div>
+          <div class="shake-banner-image">
+            <img src="/shake-banner-image.png" alt="Shake To Earn Illustration" class="shake-banner-img" onerror="this.src='/default-image.png'; this.onerror=null;" />
+          </div>
+          <button class="btn-blue shake-banner-button">Soon</button>
+        </div>
+      </div>
+      <div class="partners-section">
+        <h3 class="partners-title">Partners</h3>
+        <div class="partners-list">
+          <div class="partner-item">
+            <div class="partner-logo">
+              <img src="/sticker-store-icon.png" alt="Sticker Store Logo" class="partner-logo-img" loading="lazy" onerror="this.src='/default-partner-icon.png'; this.onerror=null;" />
+            </div>
+            <div class="partner-details">
+              <p class="partner-name">Sticker Store</p>
+              <p class="partner-description">NFT Stickers MiniApp</p>
+            </div>
+            <button class="partner-action btn-blue">Launch</button>
+          </div>
+          <div class="partner-item">
+            <div class="partner-logo">
+              <img src="/memes-tournament-icon.png" alt="Memes Tournament Logo" class="partner-logo-img" loading="lazy" onerror="this.src='/default-partner-icon.png'; this.onerror=null;" />
+            </div>
+            <div class="partner-details">
+              <p class="partner-name">Memes Tournament</p>
+              <p class="partner-description">1,000,000 Prize Pool</p>
+            </div>
+            <button class="partner-action btn-blue">Open</button>
+          </div>
+          <div class="partner-item">
+            <div class="partner-logo">
+              <img src="/spermbank-staking-icon.png" alt="Spermbank Staking Logo" class="partner-logo-img" loading="lazy" onerror="this.src='/default-partner-icon.png'; this.onerror=null;" />
+            </div>
+            <div class="partner-details">
+              <p class="partner-name">Spermbank</p>
+              <p class="partner-description">Staking, dApp</p>
+            </div>
+            <button class="partner-action btn-blue" disabled>Soon</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" id="earn">
+        <div class="section-header">
+          <img src="/tasks.gif" alt="Earn Animation" class="earn-gif" onerror="console.log('Failed to load tasks.gif')" />
+          <h2 class="earn-title section-title">Complete task – get more Airdrop Points</h2>
+        </div>
+        <div class="tasks-container">
+          <div class="task-tabs">
+            <button class="tab active" data-tab="special">Special</button>
+            <button class="tab" data-tab="daily">Daily</button>
+          </div>
+          <h3 class="tasks-title">Tasks</h3>
+          <div class="follow-earn-container" data-tab="special">
+            <div class="follow-earn-text-container">
+              <p class="follow-earn-text">
+                <strong>Follow Our Telegram Channel</strong>
+                <span class="light-text">+1000 Points</span>
+              </p>
+            </div>
+            <div>
+              <button class="button-earn-start btn-blue">Start</button>
+            </div>
+          </div>
+          <div class="follow-earn-container" data-tab="special">
+            <div class="follow-earn-text-container">
+              <p class="follow-earn-text">
+                <strong>Follow @DegentonX Account</strong>
+                <span class="light-text">+1000 Points</span>
+              </p>
+            </div>
+            <div>
+              <button class="button-earn-start btn-blue">Start</button>
+            </div>
+          </div>
+          <div class="follow-earn-container" data-tab="daily">
+            <div class="follow-earn-text-container">
+              <p class="follow-earn-text">
+                <strong>Follow @Degen Telegram Channel</strong>
+                <span class="light-text">+1000 Points</span>
+              </p>
+            </div>
+            <div>
+              <button class="button-earn-start btn-blue">Start</button>
+            </div>
+          </div>
+          <div class="follow-earn-container" data-tab="daily">
+            <div class="follow-earn-text-container">
+              <p class="follow-earn-text">
+                <strong>Follow Our X Account</strong>
+                <span class="light-text">+1000 Points</span>
+              </p>
+            </div>
+            <div>
+              <button class="button-earn-start btn-blue">Start</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="page" id="referrals">
+        <!-- Баннер рефералов -->
+        <div class="referral-banner">
+            <div class="referral-banner-bg"></div>
+            <div class="referral-banner-content">
+                <div class="referral-banner-header">
+                    <div class="text-referral-banner">
+                        <strong>Invite a friend - get a free Spermbank token</strong>
+                        <span class="text-referral-banner-light">Join the evolution – be part of history, Earn Your Legacy</span>
+                        <button class="btn-blue button-invite">Invite</button>
+                    </div>
+                    <div class="referral-icon">
+                        <div id="shake-top-lottie"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Список рефералов -->
+        <div class="referrals-list">
+            <h3>Your Referrals</h3>
+            <ul id="referrals-list-items"></ul>
+        </div>
+    </div>
+
+    <!-- Меню навигации -->
+    <div class="menu">
+        <button data-page="home" class="active">
+            <img src="/home-icon.svg" alt="Home Icon" />
+            <span>Home</span>
+        </button>
+        <button data-page="laboratory">
+            <img src="/laboratory-icon.svg" alt="Laboratory Icon" />
+            <span>Laboratory</span>
+        </button>
+        <button data-page="earn">
+            <img src="/earn-icon.svg" alt="Earn Icon" />
+            <span>Earn</span>
+        </button>
+        <button data-page="referrals">
+            <img src="/referrals-icon.svg" alt="Referrals Icon" />
+            <span>Referrals</span>
+        </button>
+    </div>
+
+    <!-- Подключаем основной скрипт -->
+    <script type="module" src="/dist/main.bundle.js"></script>
+</body>
+</html>
